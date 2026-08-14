@@ -1,0 +1,6 @@
+lc3
+main
+*.o
+*.dSYM/
+programs/*.obj
+
