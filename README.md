@@ -14,7 +14,7 @@ https://github.com/k1117n-cmyk/lc3-vm-c
 This repository is a companion project for the UNIX Cafe blog series:
 
 - [Cで作るLC-3仮想マシン 第1回: 16bit CPUの骨格を作る](https://pc-fan.net/lc3-vm-skeleton/)
-- Cで作るLC-3仮想マシン 第2回: 命令セットを実装する
+- [Cで作るLC-3仮想マシン 第2回: 命令セットを実装する](https://pc-fan.net/lc3-vm-instruction-set/)
 - Cで作るLC-3仮想マシン 第3回: TRAPと端末入力でゲームを動かす
 
 The VM loads LC-3 `.obj` files and executes them from memory. It can run the sample `2048.obj` and `rogue.obj` programs from the original LC-3 VM tutorial.
