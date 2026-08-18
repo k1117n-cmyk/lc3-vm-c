@@ -16,8 +16,12 @@ This repository is a companion project for the UNIX Cafe blog series:
 - [Cで作るLC-3仮想マシン 第1回: 16bit CPUの骨格を作る](https://pc-fan.net/lc3-vm-skeleton/)
 - [Cで作るLC-3仮想マシン 第2回: 命令セットを実装する](https://pc-fan.net/lc3-vm-instruction-set/)
 - [Cで作るLC-3仮想マシン 第3回: TRAPと端末入力でゲームを動かす](https://pc-fan.net/lc3-vm-trap-terminal-games/)
+- [Cで作るLC-3仮想マシン 第4回: LC-3アセンブリでHello Worldを書く](https://pc-fan.net/lc3-assembly-hello-world/)
+- [Cで作るLC-3仮想マシン 第5回: 小さいLC-3アセンブラを作る](https://pc-fan.net/tiny-lc3-assembler/)
 
 The VM loads LC-3 `.obj` files and executes them from memory. It can run the sample `2048.obj` and `rogue.obj` programs from the original LC-3 VM tutorial.
+The `lc3as-lab/` directory also includes a tiny assembler that can assemble the
+Hello World example used in the series.
 
 ## Files
 
@@ -28,6 +32,12 @@ The VM loads LC-3 `.obj` files and executes them from memory. It can run the sam
 ├── README.md
 ├── LICENSE
 ├── ATTRIBUTION.md
+├── lc3as-lab/
+│   ├── minias.c
+│   ├── Makefile
+│   ├── README.md
+│   └── src/
+│       └── hello.asm
 ├── programs/
 │   └── .gitkeep
 └── scripts/
@@ -105,6 +115,26 @@ W  up
 A  left
 S  down
 D  right
+```
+
+## Tiny Assembler
+
+Build the VM first, then run the tiny assembler lab:
+
+```sh
+make
+cd lc3as-lab
+make run-mini
+```
+
+This assembles `src/hello.asm` with `minias.c` and runs the generated `.obj`
+with the VM.
+
+Expected output:
+
+```text
+Hello, World!
+HALT
 ```
 
 ## Inspect an Object File
