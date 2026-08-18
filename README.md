@@ -18,6 +18,7 @@ This repository is a companion project for the UNIX Cafe blog series:
 - [Cで作るLC-3仮想マシン 第3回: TRAPと端末入力でゲームを動かす](https://pc-fan.net/lc3-vm-trap-terminal-games/)
 - [Cで作るLC-3仮想マシン 第4回: LC-3アセンブリでHello Worldを書く](https://pc-fan.net/lc3-assembly-hello-world/)
 - [Cで作るLC-3仮想マシン 第5回: 小さいLC-3アセンブラを作る](https://pc-fan.net/tiny-lc3-assembler/)
+- [C言語で作るLC-3仮想マシン 第6回: 命令実行をトレースしてVMの動きを見る](https://pc-fan.net/lc3-vm-trace/)
 
 The VM loads LC-3 `.obj` files and executes them from memory. It can run the sample `2048.obj` and `rogue.obj` programs from the original LC-3 VM tutorial.
 The `lc3as-lab/` directory also includes a tiny assembler that can assemble the
@@ -38,6 +39,15 @@ Hello World example used in the series.
 │   ├── README.md
 │   └── src/
 │       └── hello.asm
+├── lessons/
+│   ├── 03-trap-terminal-games/
+│   ├── 06-trace/
+│   ├── 07-profile/
+│   ├── 08-step/
+│   ├── 09-breakpoint/
+│   ├── 10-dump/
+│   ├── 11-debug-example/
+│   └── 12-release/
 ├── programs/
 │   └── .gitkeep
 └── scripts/
@@ -100,6 +110,12 @@ or:
 
 ```sh
 ./lc3 programs/rogue.obj
+```
+
+Trace execution:
+
+```sh
+./lc3 --trace lessons/06-trace/examples/hello.obj
 ```
 
 For 2048, answer `y` when asked:
