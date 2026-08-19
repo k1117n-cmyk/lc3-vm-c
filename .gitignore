@@ -7,3 +7,4 @@ lc3as-lab/build/
 lc3as-lab/src/*.obj
 lc3as-lab/src/*.sym
 articles/
+.DS_Store
