@@ -41,6 +41,8 @@ Hello World example used in the series.
 │   └── src/
 │       └── hello.asm
 ├── lessons/
+│   ├── 01-skeleton/
+│   ├── 02-instruction-set/
 │   ├── 03-trap-terminal-games/
 │   ├── 06-trace/
 │   ├── 07-profile/
