@@ -1,0 +1,7 @@
+Hello, World!
+HALT
+
+Instruction profile:
+TOTAL 3
+LEA  1
+TRAP 2
