@@ -19,6 +19,7 @@ This repository is a companion project for the UNIX Cafe blog series:
 - [Cで作るLC-3仮想マシン 第4回: LC-3アセンブリでHello Worldを書く](https://pc-fan.net/lc3-assembly-hello-world/)
 - [Cで作るLC-3仮想マシン 第5回: 小さいLC-3アセンブラを作る](https://pc-fan.net/tiny-lc3-assembler/)
 - [C言語で作るLC-3仮想マシン 第6回: 命令実行をトレースしてVMの動きを見る](https://pc-fan.net/lc3-vm-trace/)
+- [Cで作るLC-3仮想マシン 第7回: 命令ごとの実行回数をプロファイルする](https://pc-fan.net/lc3-vm-profile/)
 
 The VM loads LC-3 `.obj` files and executes them from memory. It can run the sample `2048.obj` and `rogue.obj` programs from the original LC-3 VM tutorial.
 The `lc3as-lab/` directory also includes a tiny assembler that can assemble the
