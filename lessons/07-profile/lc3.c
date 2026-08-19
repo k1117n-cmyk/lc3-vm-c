@@ -564,7 +564,9 @@ int main(int argc, const char* argv[])
         // トレース有効時は、命令実行後のレジスタ状態を表示する
         if (trace_enabled) {
             trace_registers();
-            printf("\n");
+            if (running) {
+                printf("\n");
+            }
         }
     }
     restore_input_buffering();
