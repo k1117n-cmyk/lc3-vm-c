@@ -66,13 +66,11 @@ enum
 };
 
 #define MEMORY_MAX (1 << 16)
-// 追加: opcodeは4bitなので、集計用の配列は16要素にする
 #define OPCODE_COUNT 16
 
 uint16_t memory[MEMORY_MAX];  /* 65536 locations */
 uint16_t reg[R_COUNT];
 
-// 追加: プロファイル結果を保持するカウンタ
 static uint64_t total_instructions;
 static uint64_t op_counts[OPCODE_COUNT];
 
@@ -192,7 +190,6 @@ uint16_t mem_read(uint16_t address)
     return memory[address];
 }
 
-// opcode番号を、人間が読みやすい命令名に変換する
 static const char *opcode_name(uint16_t op)
 {
     switch (op) {
@@ -216,7 +213,6 @@ static const char *opcode_name(uint16_t op)
     }
 }
 
-// TRAPベクタ番号を、LC-3のサービス名に変換する
 static const char *trap_name(uint16_t trapvect)
 {
     switch (trapvect) {
@@ -230,7 +226,6 @@ static const char *trap_name(uint16_t trapvect)
     }
 }
 
-// 条件フラグのbit値を、P/Z/Nの文字に変換する
 static const char *cond_name(uint16_t cond)
 {
     switch (cond) {
@@ -241,7 +236,6 @@ static const char *cond_name(uint16_t cond)
     }
 }
 
-// 1命令分のトレース行を表示する
 static void trace_instruction(uint16_t pc_before, uint16_t instr, uint16_t op)
 {
     printf("PC=%04X INSTR=%04X OP=%s", pc_before, instr, opcode_name(op));
@@ -254,7 +248,6 @@ static void trace_instruction(uint16_t pc_before, uint16_t instr, uint16_t op)
     printf("\n");
 }
 
-// 命令実行後のレジスタ状態を表示する
 static void trace_registers(void)
 {
     printf("R0=%04X R1=%04X R2=%04X R3=%04X ", reg[R_R0], reg[R_R1], reg[R_R2], reg[R_R3]);
@@ -262,7 +255,6 @@ static void trace_registers(void)
     printf("PC=%04X COND=%s\n", reg[R_PC], cond_name(reg[R_COND]));
 }
 
-// 追加: プロファイル結果を最後にまとめて表示する
 static void print_profile(void)
 {
     printf("\nprofile:\n");
@@ -280,11 +272,26 @@ static void print_profile(void)
     }
 }
 
+// step実行時に、次の命令へ進むまで待つ：追加するコード
+static void wait_for_step(void)
+{
+    int c;
+
+    printf("step> ");
+    fflush(stdout);
+
+    do {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
+
+    printf("\n");
+}
+
 int main(int argc, const char* argv[])
 {
-    // 変更: 引数処理を走査式にして、--traceと--profileを同時指定できるようにする
     int trace_enabled = 0;
     int profile_enabled = 0;
+    int step_enabled = 0; // 追加するコード
     const char *image_path = NULL;
 
     for (int i = 1; i < argc; ++i) {
@@ -292,21 +299,29 @@ int main(int argc, const char* argv[])
             trace_enabled = 1;
         } else if (strcmp(argv[i], "--profile") == 0) {
             profile_enabled = 1;
+        // –stepオプションを受け取る：追加するコード
+        } else if (strcmp(argv[i], "--step") == 0) {
+            step_enabled = 1;
         } else if (argv[i][0] == '-') {
             fprintf(stderr, "unknown option: %s\n", argv[i]);
-            fprintf(stderr, "usage: %s [--trace] [--profile] image.obj\n", argv[0]);
+            fprintf(stderr, "usage: %s [--trace] [--profile] [--step] image.obj\n", argv[0]);
             return 2;
         } else if (image_path == NULL) {
             image_path = argv[i];
         } else {
-            fprintf(stderr, "usage: %s [--trace] [--profile] image.obj\n", argv[0]);
+            fprintf(stderr, "usage: %s [--trace] [--profile] [--step] image.obj\n", argv[0]);
             return 2;
         }
     }
 
     if (image_path == NULL) {
-        fprintf(stderr, "usage: %s [--trace] [--profile] image.obj\n", argv[0]);
+        fprintf(stderr, "usage: %s [--trace] [--profile] [--step] image.obj\n", argv[0]);
         return 2;
+    }
+
+    // step実行では、毎回止まる前に命令情報も見たいのでtraceを自動で有効にする：追加するコード
+    if (step_enabled) {
+        trace_enabled = 1;
     }
 
     if (!read_image(image_path))
@@ -330,22 +345,17 @@ int main(int argc, const char* argv[])
     while (running)
     {
         /* FETCH */
-        // fetch前のPCを保存してトレース表示に使う
         uint16_t pc_before = reg[R_PC];
 
-        // 命令を読み、PCを次の命令へ進める
         uint16_t instr = mem_read(reg[R_PC]++);
 
-        // opcodeは命令wordの上位4bit
         uint16_t op = instr >> 12;
 
-        // 追加: 1命令fetchするたびに合計とopcode別の回数を増やす
         if (profile_enabled) {
             ++total_instructions;
             ++op_counts[op];
         }
 
-        // トレース有効時は、命令実行前の状態を表示する
         if (trace_enabled) {
             trace_instruction(pc_before, instr, op);
         }
@@ -561,17 +571,20 @@ int main(int argc, const char* argv[])
                 break;
         }
 
-        // トレース有効時は、命令実行後のレジスタ状態を表示する
         if (trace_enabled) {
             trace_registers();
             if (running) {
                 printf("\n");
             }
         }
+
+        // 追加:step有効時は、1命令実行するたびにEnter入力を待つ：追加するコード
+        if (step_enabled && running) {
+            wait_for_step();
+        }
     }
     restore_input_buffering();
 
-    // 追加: プログラム終了後にプロファイル結果を表示する
     if (profile_enabled) {
         print_profile();
     }
