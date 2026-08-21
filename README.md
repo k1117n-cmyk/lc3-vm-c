@@ -22,6 +22,7 @@ This repository is a companion project for the UNIX Cafe blog series:
 - [Cで作るLC-3仮想マシン 第7回: 命令ごとの実行回数をプロファイルする](https://pc-fan.net/lc3-vm-profile/)
 - [Cで作るLC-3仮想マシン 第8回: ステップ実行で1命令ずつ進める](https://pc-fan.net/lc3-vm-step/)
 - [Cで作るLC-3仮想マシン 第9回: ブレークポイントで指定番地で止める](https://pc-fan.net/lc3-vm-c-breakpoint/)
+- [Cで作るLC-3仮想マシン 第10回: レジスタとメモリをダンプして状態を見る](https://pc-fan.net/lc3-vm-c-dump-registers-memory/)
 
 The VM loads LC-3 `.obj` files and executes them from memory. It can run the sample `2048.obj` and `rogue.obj` programs from the original LC-3 VM tutorial.
 The `lc3as-lab/` directory also includes a tiny assembler that can assemble the
