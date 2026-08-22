@@ -6,6 +6,10 @@ It mirrors the public repository shape used in the last article: a root VM
 source file, a simple `Makefile`, a README-oriented project layout, sample
 program helpers, fixed examples, license information, and verification notes.
 
+Article:
+
+https://pc-fan.net/lc3-vm-release/
+
 ## Contents
 
 ```text
