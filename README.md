@@ -13,6 +13,7 @@ https://github.com/k1117n-cmyk/lc3-vm-c
 
 This repository is a companion project for the UNIX Cafe blog series:
 
+- [Series summary: C言語でLC-3仮想マシンを自作する入門まとめ【全12回】](https://pc-fan.net/lc3-vm-c-series-summary/)
 - [Cで作るLC-3仮想マシン 第1回: 16bit CPUの骨格を作る](https://pc-fan.net/lc3-vm-skeleton/)
 - [Cで作るLC-3仮想マシン 第2回: 命令セットを実装する](https://pc-fan.net/lc3-vm-instruction-set/)
 - [Cで作るLC-3仮想マシン 第3回: TRAPと端末入力でゲームを動かす](https://pc-fan.net/lc3-vm-trap-terminal-games/)
