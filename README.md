@@ -21,7 +21,7 @@ This repository is a companion project for the UNIX Cafe blog series:
 - [Cで作るLC-3仮想マシン 第5回: 小さいLC-3アセンブラを作る](https://pc-fan.net/tiny-lc3-assembler/)
 - [Cで作るLC-3仮想マシン 第6回: 命令実行をトレースしてVMの動きを見る](https://pc-fan.net/lc3-vm-trace/)
 - [Cで作るLC-3仮想マシン 第7回: 命令ごとの実行回数をプロファイルする](https://pc-fan.net/lc3-vm-profile/)
-- [Cで作るLC-3仮想マシン 第8回: ステップ実行で1命令ずつ進める](https://pc-fan.net/lc3-vm-step/)
+- [Cで作るLC-3仮想マシン 第8回: ステップ実行で1命令ずつ進める](https://pc-fan.net/lc3-vm-step-execution/)
 - [Cで作るLC-3仮想マシン 第9回: ブレークポイントで指定番地で止める](https://pc-fan.net/lc3-vm-c-breakpoint/)
 - [Cで作るLC-3仮想マシン 第10回: レジスタとメモリをダンプして状態を見る](https://pc-fan.net/lc3-vm-c-dump-registers-memory/)
 - [Cで作るLC-3仮想マシン 第11回: 小さいLC-3プログラムをデバッグする](https://pc-fan.net/lc3-vm-debug-example/)
