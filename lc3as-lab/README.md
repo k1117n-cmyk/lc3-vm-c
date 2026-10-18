@@ -69,18 +69,35 @@ Meaning:
 - `f022`: `PUTS`
 - `f025`: `HALT`
 
-## Compare With The Direct Bytes
+## Compare Direct Bytes With lc3as
 
-You can compare the tiny assembler output with the direct byte sequence used in
-the earlier Hello World article:
+To verify the earlier Hello World article, compare the `.obj` written directly
+with `printf` (`build/hello-printf.obj`) against the `.obj` produced by `lc3as`
+(`build/hello.obj`):
 
 ```sh
 make compare-printf
 ```
 
-## Optional: Compare With lc3as
+If `lc3as` is not on your `PATH`, specify its location:
 
-If you have an `lc3as` command installed, you can compare against it:
+```sh
+make LC3AS=/path/to/lc3as compare-printf
+```
+
+The command exits successfully only when the two files match byte for byte,
+then displays the `printf` version with `xxd`. The output begins with
+`3000 e002 f022 f025`.
+
+On macOS, a downloaded `lc3as` executable may be blocked with an "Apple cannot
+check it for malicious software" warning. If you trust the `lc3tools` package,
+run `make lc3as` in its directory and pass the path to the newly built
+executable using `LC3AS`.
+
+## Compare The Tiny Assembler With lc3as
+
+To compare the tiny assembler output (`build/hello-minias.obj`) with the
+`lc3as` output (`build/hello.obj`), run:
 
 ```sh
 make compare

@@ -33,9 +33,9 @@ run-printf: build/hello-printf.obj $(VM)
 inspect-printf: build/hello-printf.obj
 	xxd build/hello-printf.obj
 
-compare-printf: build/hello-printf.obj build/hello-minias.obj
-	cmp -s build/hello-printf.obj build/hello-minias.obj
-	xxd build/hello-minias.obj
+compare-printf: build/hello-printf.obj build/hello.obj
+	cmp -s build/hello-printf.obj build/hello.obj
+	xxd build/hello-printf.obj
 
 assemble: build/hello.obj
 
